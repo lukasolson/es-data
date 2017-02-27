@@ -1,0 +1,208 @@
+{
+  "record": {
+    "properties": {
+      "creation_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "device": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "end_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "metadata_entry": {
+        "properties": {
+          "key": {
+            "type": "keyword",
+            "fields": {
+              "search": {
+                "type": "text"
+              }
+            }
+          },
+          "value": {
+            "type": "keyword",
+            "fields": {
+              "search": {
+                "type": "text"
+              }
+            }
+          }
+        }
+      },
+      "source_name": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "source_version": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "start_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "type": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "unit": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "value": {
+        "type": "float",
+        "ignore_malformed": true
+      }
+    }
+  },
+  "activity_summary": {
+    "properties": {
+      "active_energy_burned": {
+        "type": "float"
+      },
+      "active_energy_burned_goal": {
+        "type": "float"
+      },
+      "active_energy_burned_unit": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "apple_exercise_time": {
+        "type": "integer"
+      },
+      "apple_exercise_time_goal": {
+        "type": "integer"
+      },
+      "apple_stand_hours": {
+        "type": "integer"
+      },
+      "apple_stand_hours_goal": {
+        "type": "integer"
+      },
+      "date_components": {
+        "type": "date"
+      }
+    }
+  },
+  "workout": {
+    "properties": {
+      "creation_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "duration": {
+        "type": "float"
+      },
+      "duration_unit": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "end_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "metadata_entry": {
+        "properties": {
+          "key": {
+            "type": "keyword",
+            "fields": {
+              "search": {
+                "type": "text"
+              }
+            }
+          },
+          "value": {
+            "type": "keyword",
+            "fields": {
+              "search": {
+                "type": "text"
+              }
+            }
+          }
+        }
+      },
+      "source_name": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "source_version": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "start_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "total_distance": {
+        "type": "float"
+      },
+      "total_distance_unit": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "total_energy_burned": {
+        "type": "float"
+      },
+      "total_energy_burned_unit": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      },
+      "workout_activity_type": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text"
+          }
+        }
+      }
+    }
+  }
+}
