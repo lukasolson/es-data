@@ -1,0 +1,96 @@
+{
+  "observation": {
+    "properties": {
+      "@timestamp": {
+        "type": "date"
+      },
+      "conditions": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "date": {
+        "type": "byte"
+      },
+      "day": {
+        "type": "byte"
+      },
+      "dew_point": {
+        "type": "float"
+      },
+      "events": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "gust_speed": {
+        "type": "float"
+      },
+      "heat_index": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "hours": {
+        "type": "byte"
+      },
+      "humidity": {
+        "type": "byte"
+      },
+      "month": {
+        "type": "byte"
+      },
+      "precip": {
+        "type": "float"
+      },
+      "pressure": {
+        "type": "float"
+      },
+      "temp": {
+        "type": "float"
+      },
+      "time_mst": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "visibility": {
+        "type": "float"
+      },
+      "wind_dir": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "wind_speed": {
+        "type": "float"
+      },
+      "windchill": {
+        "type": "float"
+      },
+      "year": {
+        "type": "short"
+      }
+    }
+  }
+}

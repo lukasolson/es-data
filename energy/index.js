@@ -11,11 +11,8 @@ const indexPromise = readFile('/Users/lukas/Development/es-data/energy/mappings.
   }
 }));
 
-const docsPromise = Promise.all([
-  readFile('/Users/lukas/Development/es-data/energy/data/Electricity\ -\ Sheet1.tsv', 'utf8').then(data => getDocsFromTsv(index, 'electricity', data)),
-  readFile('/Users/lukas/Development/es-data/energy/data/Weather\ -\ Sheet1.tsv', 'utf8').then(data => getDocsFromTsv(index, 'weather', data))
-])
-.then(entries => _.flatten(entries));
+const docsPromise = readFile('/Users/lukas/Development/es-data/energy/data/Electricity\ -\ Sheet1.tsv', 'utf8')
+.then(data => getDocsFromTsv(index, 'electricity', data));
 
 function getDocsFromTsv(index, type, data) {
   const rows = data.split('\r\n')

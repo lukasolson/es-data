@@ -5,7 +5,10 @@ const readFile = Promise.promisify(require('fs').readFile);
 const index = 'finance';
 
 const indexPromise = readFile('/Users/lukas/Development/es-data/finance/mappings.json', 'utf8').then(data => ({
-  index
+  index,
+  body: {
+    mappings: JSON.parse(data)
+  }
 }));
 
 const docsPromise = readFile('/Users/lukas/Development/es-data/finance/data/Transactions\ -\ Sheet1.tsv', 'utf8')
