@@ -8,7 +8,8 @@
         "type": "keyword",
         "fields": {
           "search": {
-            "type": "text"
+            "type": "text",
+            "fielddata": true
           }
         }
       },
@@ -20,21 +21,23 @@
         "type": "keyword",
         "fields": {
           "search": {
-            "type": "text"
+            "type": "text",
+            "fielddata": true
           }
         }
       },
-      "date": {
+      "day_of_month": {
         "type": "byte"
       },
-      "day": {
+      "day_of_week": {
         "type": "byte"
       },
       "description": {
         "type": "keyword",
         "fields": {
           "search": {
-            "type": "text"
+            "type": "text",
+            "fielddata": true
           }
         }
       },
@@ -42,7 +45,8 @@
         "type": "keyword",
         "fields": {
           "search": {
-            "type": "text"
+            "type": "text",
+            "fielddata": true
           }
         }
       },

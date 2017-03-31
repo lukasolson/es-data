@@ -22,6 +22,7 @@ function getDocsFromTsv(index, type, data) {
   const headers = rows[0].map(_.snakeCase);
   return rows.slice(1) // Remove header
   .map(row => _.zipObject(headers, row))
+  .map(entry => _.assign({}, entry, {amount: randomAmount(entry.amount < 0)}))
   .map(entry => addDateFields(entry, new Date(entry.date)))
   .map((entry, i) => ({
     index,
@@ -31,13 +32,17 @@ function getDocsFromTsv(index, type, data) {
   }));
 }
 
+function randomAmount(negative) {
+  return _.random(0, 1000 * 100) / 100 * (negative ? -1 : 1);
+}
+
 function addDateFields(entry, date) {
-  return _.assign({}, entry, {
+  return Object.assign({}, entry, {
     '@timestamp': date.toISOString(),
     year: date.getFullYear(),
     month: date.getMonth() + 1,
-    date: date.getDate(),
-    day: date.getDay()
+    day_of_month: date.getDate(),
+    day_of_week: date.getDay()
   });
 }
 

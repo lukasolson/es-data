@@ -30,12 +30,12 @@ function getDocsFromTxt(index, type, data) {
 }
 
 function addDateFields(entry, date) {
-  return _.assign({}, entry, {
+  return Object.assign({}, entry, {
     '@timestamp': date.toISOString(),
     year: date.getFullYear(),
     month: date.getMonth() + 1,
-    date: date.getDate(),
-    day: date.getDay(),
+    day_of_month: date.getDate(),
+    day_of_week: date.getDay(),
     hours: date.getHours()
   });
 }

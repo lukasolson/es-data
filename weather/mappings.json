@@ -13,10 +13,10 @@
           }
         }
       },
-      "date": {
+      "day_of_month": {
         "type": "byte"
       },
-      "day": {
+      "day_of_week": {
         "type": "byte"
       },
       "dew_point": {

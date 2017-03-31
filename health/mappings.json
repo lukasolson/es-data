@@ -1,9 +1,18 @@
 {
   "record": {
     "properties": {
+      "@timestamp": {
+        "type": "date"
+      },
       "creation_date": {
         "type": "date",
         "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "day_of_month": {
+        "type": "byte"
+      },
+      "day_of_week": {
+        "type": "byte"
       },
       "device": {
         "type": "keyword",
@@ -36,6 +45,9 @@
             }
           }
         }
+      },
+      "month": {
+        "type": "byte"
       },
       "source_name": {
         "type": "keyword",
@@ -76,11 +88,17 @@
       "value": {
         "type": "float",
         "ignore_malformed": true
+      },
+      "year": {
+        "type": "short"
       }
     }
   },
   "activity_summary": {
     "properties": {
+      "@timestamp": {
+        "type": "date"
+      },
       "active_energy_burned": {
         "type": "float"
       },
@@ -107,16 +125,37 @@
       "apple_stand_hours_goal": {
         "type": "integer"
       },
+      "day_of_month": {
+        "type": "byte"
+      },
       "date_components": {
         "type": "date"
+      },
+      "day_of_week": {
+        "type": "byte"
+      },
+      "month": {
+        "type": "byte"
+      },
+      "year": {
+        "type": "short"
       }
     }
   },
   "workout": {
     "properties": {
+      "@timestamp": {
+        "type": "date"
+      },
       "creation_date": {
         "type": "date",
         "format": "yyyy-MM-dd HH:mm:ss Z"
+      },
+      "day_of_month": {
+        "type": "byte"
+      },
+      "day_of_week": {
+        "type": "byte"
       },
       "duration": {
         "type": "float"
@@ -152,6 +191,9 @@
             }
           }
         }
+      },
+      "month": {
+        "type": "byte"
       },
       "source_name": {
         "type": "keyword",
@@ -202,6 +244,9 @@
             "type": "text"
           }
         }
+      },
+      "year": {
+        "type": "short"
       }
     }
   }

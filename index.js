@@ -16,7 +16,7 @@ datasets.forEach(({indexPromise, docsPromise}) => {
   indexPromise.then(index => client.indices.create(index))
   .then(() => docsPromise)
   .then(docs => {
-    return Promise.all(docs.map(doc => client.index(doc).catch(console.log)))
+    return docs.map(doc => client.index(doc));
   })
   .catch(console.log);
 });
