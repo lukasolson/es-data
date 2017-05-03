@@ -1,0 +1,21 @@
+{
+  "ancestry": {
+    "properties": {
+      "allele1": {
+        "type": "keyword"
+      },
+      "allele2": {
+        "type": "keyword"
+      },
+      "chromosome": {
+        "type": "byte"
+      },
+      "position": {
+        "type": "integer"
+      },
+      "rsid": {
+        "type": "keyword"
+      }
+    }
+  }
+}
