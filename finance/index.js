@@ -2,38 +2,52 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const readFile = Promise.promisify(require('fs').readFile);
 
-const index = 'finance';
-
-const indexPromise = readFile('/Users/lukas/Development/es-data/finance/mappings.json', 'utf8').then(data => ({
-  index,
+const templatePromise = readFile('finance/mappings.json', 'utf8')
+.then(json => ({
+  name: 'finance',
   body: {
-    mappings: JSON.parse(data)
+    template: 'finance',
+    mappings: JSON.parse(json)
   }
 }));
 
-const docsPromise = readFile('/Users/lukas/Development/es-data/finance/data/Transactions\ -\ Sheet1.tsv', 'utf8')
-.then(data => getDocsFromTsv(index, 'transaction', data));
+const docsPromise = readFile('finance/data/Transactions\ -\ Sheet1.tsv', 'utf8')
+.then(tsv => getDocsFromTsv(tsv));
 
-function getDocsFromTsv(index, type, data) {
-  const rows = data.split('\r\n')
+function getDocsFromTsv(tsv) {
+  const rows = tsv.split('\r\n')
   .filter(row => row.length > 0) // Remove empty lines
   .map(row => row.split('\t'));
 
   const headers = rows[0].map(_.snakeCase);
   return rows.slice(1) // Remove header
   .map(row => _.zipObject(headers, row))
-  .map(entry => _.assign({}, entry, {amount: randomAmount(entry.amount < 0)}))
+  .map(parseAmount)
+  // .map(randomAmount)
   .map(entry => addDateFields(entry, new Date(entry.date)))
   .map((entry, i) => ({
-    index,
-    type,
-    id: type + i,
+    index: 'finance',
+    type: 'transaction',
+    id: i,
     body: entry
   }));
 }
 
-function randomAmount(negative) {
-  return _.random(0, 1000 * 100) / 100 * (negative ? -1 : 1);
+function parseAmount(entry) {
+  const amount = parseFloat(
+    entry.amount
+    .split('(').join('-')
+    .split(')').join('')
+    .split(',').join('')
+  );
+
+  return Object.assign({}, entry, {amount});
+}
+
+function randomAmount(entry) {
+  const multiplier = entry.amount < 0 ? -1 : 1;
+  const amount = multiplier * _.random(0, 1000 * 100) / 100;
+  return Object.assign({}, entry, {amount});
 }
 
 function addDateFields(entry, date) {
@@ -46,4 +60,4 @@ function addDateFields(entry, date) {
   });
 }
 
-module.exports = {indexPromise, docsPromise};
+module.exports = {templatePromise, docsPromise};

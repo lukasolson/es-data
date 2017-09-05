@@ -26,6 +26,15 @@
           }
         }
       },
+      "date": {
+        "type": "keyword",
+        "fields": {
+          "search": {
+            "type": "text",
+            "fielddata": true
+          }
+        }
+      },
       "day_of_month": {
         "type": "byte"
       },

@@ -2,27 +2,31 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const elasticsearch = require('elasticsearch');
 const client = new elasticsearch.Client({
-  host: 'localhost:9200',
-  auth: 'elastic:changeme'
+  host: 'elastic:password@localhost:9200'
 });
 
 const datasets = [
-  require('./energy'),
+  // require('./energy'),
   require('./finance'),
-  require('./health'),
-  require('./snp'),
-  require('./weather')
+  // require('./health'),
+  // require('./snp'),
+  // require('./weather')
 ];
 
-datasets.forEach(({indexPromise, docsPromise}) => {
-  indexPromise.then(index => client.indices.create(index))
+Promise.each(datasets, ({templatePromise, docsPromise}) => {
+  return templatePromise
+  .then(template => client.indices.putTemplate(template))
   .then(() => docsPromise)
-  .then(docs => (
-    _.chunk(docs, 10000)
-    .map(chunk => client.bulk(getBulkFromDocs(chunk)))
-  ))
+  .then(indexDocs)
   .catch(console.log);
 });
+
+function indexDocs(docs) {
+  const chunks = _.chunk(docs, 1000);
+  return Promise.each(chunks, chunk => {
+    client.bulk(getBulkFromDocs(chunk));
+  });
+}
 
 function getBulkFromDocs(docs) {
   return {

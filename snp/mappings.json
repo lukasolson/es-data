@@ -1,14 +1,11 @@
 {
-  "ancestry": {
+  "23andme": {
     "properties": {
-      "allele1": {
-        "type": "keyword"
-      },
-      "allele2": {
-        "type": "keyword"
-      },
       "chromosome": {
         "type": "byte"
+      },
+      "genotype": {
+        "type": "keyword"
       },
       "position": {
         "type": "integer"
