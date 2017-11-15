@@ -6,25 +6,25 @@ const client = new elasticsearch.Client({
 });
 
 const datasets = [
-  // require('./energy'),
   require('./finance'),
-  // require('./health'),
-  // require('./snp'),
-  // require('./weather')
+  // require('./health')
 ];
 
 Promise.each(datasets, ({templatePromise, docsPromise}) => {
   return templatePromise
   .then(template => client.indices.putTemplate(template))
   .then(() => docsPromise)
-  .then(indexDocs)
-  .catch(console.log);
+  .then(indexDocs);
 });
 
-function indexDocs(docs) {
-  const chunks = _.chunk(docs, 1000);
-  return Promise.each(chunks, chunk => {
-    client.bulk(getBulkFromDocs(chunk));
+function indexDocs(docs, chunkSize = 1000) {
+  if (!docs.length) return;
+  console.log(docs.length);
+  const chunk = docs.slice(0, chunkSize);
+  const bulkRequest = getBulkFromDocs(chunk);
+  client.bulk(bulkRequest, (err, resp) => {
+    if (err) throw err;
+    indexDocs(docs.slice(chunkSize));
   });
 }
 

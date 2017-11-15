@@ -23,8 +23,9 @@ function getDocsFromTsv(tsv) {
   return rows.slice(1) // Remove header
   .map(row => _.zipObject(headers, row))
   .map(parseAmount)
-  // .map(randomAmount)
+  .map(randomAmount)
   .map(entry => addDateFields(entry, new Date(entry.date)))
+  .map(entry => _.omit(entry, 'date'))
   .map((entry, i) => ({
     index: 'finance',
     type: 'transaction',

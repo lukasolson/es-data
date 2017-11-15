@@ -7,7 +7,7 @@ const templatePromise = readFile('health/mappings.json', 'utf8')
 .then(json => ({
   name: 'health',
   body: {
-    template: `health-*`,
+    template: `health`,
     mappings: JSON.parse(json)
   }
 }));
@@ -21,7 +21,7 @@ function getDocsFromXml(xml) {
   .map(entry => _.mapKeys(entry, mapKeysToSnakeCase))
   .map(entry => addDateFields(entry, new Date(entry.date_components || entry.start_date)))
   .map((entry, i) => ({
-    index: `health-${entry.year}-${entry.month}-${entry.day_of_month}`,
+    index: `health`,
     type: 'record',
     id: i,
     body: entry
