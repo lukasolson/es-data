@@ -7,7 +7,8 @@ const client = new elasticsearch.Client({
 
 const datasets = [
   require('./finance'),
-  // require('./health')
+  require('./health'),
+  require('./productivity')
 ];
 
 Promise.each(datasets, ({templatePromise, docsPromise}) => {

@@ -2,16 +2,19 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const readFile = Promise.promisify(require('fs').readFile);
 
-const templatePromise = readFile('finance/mappings.json', 'utf8')
+const index = 'finance';
+const type = 'transaction';
+
+const templatePromise = readFile(index + '/mappings.json', 'utf8')
 .then(json => ({
-  name: 'finance',
+  name: index,
   body: {
-    template: 'finance',
+    template: index,
     mappings: JSON.parse(json)
   }
 }));
 
-const docsPromise = readFile('finance/data/Transactions\ -\ Sheet1.tsv', 'utf8')
+const docsPromise = readFile(index + '/data/Financial\ Transactions\ -\ Sheet1.tsv', 'utf8')
 .then(tsv => getDocsFromTsv(tsv));
 
 function getDocsFromTsv(tsv) {
@@ -26,12 +29,7 @@ function getDocsFromTsv(tsv) {
   .map(randomAmount)
   .map(entry => addDateFields(entry, new Date(entry.date)))
   .map(entry => _.omit(entry, 'date'))
-  .map((entry, i) => ({
-    index: 'finance',
-    type: 'transaction',
-    id: i,
-    body: entry
-  }));
+  .map((body, i) => ({index, type, id: i, body}));
 }
 
 function parseAmount(entry) {
