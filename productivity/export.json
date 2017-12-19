@@ -1,0 +1,157 @@
+[
+  {
+    "_id": "fa1eba70-da0c-11e7-b059-af4f882bbd8a",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Productivity",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"panelIndex\":\"1\",\"gridData\":{\"x\":3,\"y\":3,\"w\":3,\"h\":3,\"i\":\"1\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"8f15c200-da0c-11e7-b059-af4f882bbd8a\"},{\"panelIndex\":\"2\",\"gridData\":{\"x\":9,\"y\":3,\"w\":3,\"h\":3,\"i\":\"2\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"ad79c1b0-da0c-11e7-b059-af4f882bbd8a\"},{\"panelIndex\":\"3\",\"gridData\":{\"x\":6,\"y\":3,\"w\":3,\"h\":3,\"i\":\"3\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"a67aae10-da0c-11e7-b059-af4f882bbd8a\"},{\"panelIndex\":\"4\",\"gridData\":{\"x\":6,\"y\":0,\"w\":3,\"h\":3,\"i\":\"4\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"9e546a70-da0a-11e7-b059-af4f882bbd8a\"},{\"panelIndex\":\"5\",\"gridData\":{\"x\":3,\"y\":0,\"w\":3,\"h\":3,\"i\":\"5\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"969d7880-da0a-11e7-b059-af4f882bbd8a\"},{\"panelIndex\":\"6\",\"gridData\":{\"x\":0,\"y\":0,\"w\":3,\"h\":3,\"i\":\"6\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"900ae250-da0a-11e7-b059-af4f882bbd8a\"},{\"panelIndex\":\"7\",\"gridData\":{\"x\":9,\"y\":0,\"w\":3,\"h\":3,\"i\":\"7\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"d8feeb90-da0b-11e7-b059-af4f882bbd8a\",\"embeddableConfig\":{\"vis\":{\"colors\":{\"Distracting\":\"#EA6460\",\"Neutral\":\"#64B0C8\",\"Productive\":\"#9AC48A\"},\"legendOpen\":false}}},{\"panelIndex\":\"8\",\"gridData\":{\"x\":0,\"y\":3,\"w\":3,\"h\":3,\"i\":\"8\"},\"version\":\"7.0.0-alpha1\",\"type\":\"visualization\",\"id\":\"4fdb3c00-da0c-11e7-b059-af4f882bbd8a\",\"embeddableConfig\":{\"vis\":{\"colors\":{\"Distracting\":\"#EA6460\",\"Neutral\":\"#65C5DB\",\"Productive\":\"#9AC48A\"},\"legendOpen\":false}}}]",
+      "optionsJSON": "{\"darkTheme\":false,\"useMargins\":true,\"hidePanelTitles\":false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[],\"highlightAll\":true,\"version\":true}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "4fdb3c00-da0c-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Productivity by Hour",
+      "visState": "{\"title\":\"Productivity by Hour\",\"type\":\"histogram\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Sum of duration\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"histogram\",\"mode\":\"stacked\",\"data\":{\"label\":\"Sum of duration\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"h\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"filters\",\"schema\":\"group\",\"params\":{\"filters\":[{\"input\":{\"query\":\"category.productivity:\\\"-1\\\"\"},\"label\":\"Distracting\"},{\"input\":{\"query\":\"category.productivity:0\"},\"label\":\"Neutral\"},{\"input\":{\"query\":\"category.productivity:1\"},\"label\":\"Productive\"}]}}]}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"Distracting\":\"#EA6460\",\"Neutral\":\"#65C5DB\",\"Productive\":\"#9AC48A\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "9e546a70-da0a-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Distracting",
+      "visState": "{\"title\":\"Distracting\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"app.name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[{\"meta\":{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"category.productivity\",\"value\":\"-1\",\"params\":{\"query\":-1,\"type\":\"phrase\"}},\"query\":{\"match\":{\"category.productivity\":{\"query\":-1,\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "900ae250-da0a-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Productive",
+      "visState": "{\"title\":\"Productive\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"app.name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[{\"meta\":{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"category.productivity\",\"value\":\"1\",\"params\":{\"query\":1,\"type\":\"phrase\"}},\"query\":{\"match\":{\"category.productivity\":{\"query\":1,\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "969d7880-da0a-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Neutral",
+      "visState": "{\"title\":\"Neutral\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"app.name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[{\"meta\":{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"category.productivity\",\"value\":\"0\",\"params\":{\"query\":0,\"type\":\"phrase\"}},\"query\":{\"match\":{\"category.productivity\":{\"query\":0,\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "d8feeb90-da0b-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Productivity",
+      "visState": "{\"title\":\"Productivity\",\"type\":\"pie\",\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"filters\",\"schema\":\"segment\",\"params\":{\"filters\":[{\"input\":{\"query\":\"category.productivity:\\\"-1\\\"\"},\"label\":\"Distracting\"},{\"input\":{\"query\":\"category.productivity:0\"},\"label\":\"Neutral\"},{\"input\":{\"query\":\"category.productivity:1\"},\"label\":\"Productive\"}]}}]}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"Distracting\":\"#EA6460\",\"Neutral\":\"#64B0C8\",\"Productive\":\"#9AC48A\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "8f15c200-da0c-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Activities",
+      "visState": "{\"title\":\"Activities\",\"type\":\"table\",\"params\":{\"perPage\":null,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"activity.title\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "a67aae10-da0c-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Categories",
+      "visState": "{\"title\":\"Categories\",\"type\":\"table\",\"params\":{\"perPage\":null,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"category.name\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "ad79c1b0-da0c-11e7-b059-af4f882bbd8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "Applications",
+      "visState": "{\"title\":\"Applications\",\"type\":\"table\",\"params\":{\"perPage\":null,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"duration\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"app.name\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"4c374c30-da0a-11e7-b059-af4f882bbd8a\",\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  }
+]

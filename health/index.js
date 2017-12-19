@@ -1,44 +1,30 @@
-const _ = require('lodash');
-const Promise = require('bluebird');
-const readFile = Promise.promisify(require('fs').readFile);
+const path = require('path');
+const fs = require('fs');
+const {mapKeys, snakeCase} = require('lodash');
 const {toJson} = require('xml2json');
+const {indexDocs} = require('../indexer');
 
 const index = 'health';
 const type = 'record';
+const filename = path.resolve(__dirname, 'data', 'apple_health_export', 'export.xml');
 
-const templatePromise = readFile(index + '/mappings.json', 'utf8')
-.then(json => ({
-  name: index,
-  body: {
-    template: index,
-    mappings: JSON.parse(json)
-  }
-}));
+fs.readFile(filename, 'utf8', indexFile);
 
-const docsPromise = readFile(index + '/data/apple_health_export/export.xml', 'utf8')
-.then(xml => getDocsFromXml(xml));
-
-function getDocsFromXml(xml) {
+function indexFile(err, xml) {
   const {HealthData} = toJson(xml, {object: true});
-  return _(HealthData.Record)
-  .map(entry => _.mapKeys(entry, mapKeysToSnakeCase))
-  .map(entry => addDateFields(entry, new Date(entry.date_components || entry.start_date)))
-  .map((body, i) => ({index, type, id: i, body}))
-  .value();
+  indexDocs(
+    HealthData.Record
+    .map(normalizeKeys)
+    .map(addTimestamp)
+    .map((body, i) => ({index, type, id: i, body}))
+  );
 }
 
-function mapKeysToSnakeCase(value, key) {
-  return _.snakeCase(key);
+function normalizeKeys(entry) {
+  return mapKeys(entry, (value, key) => snakeCase(key));
 }
 
-function addDateFields(entry, date) {
-  return Object.assign({}, entry, {
-    '@timestamp': date.toISOString(),
-    year: date.getFullYear(),
-    month: date.getMonth() + 1,
-    day_of_month: date.getDate(),
-    day_of_week: date.getDay()
-  });
+function addTimestamp(entry) {
+  const timestamp = new Date(entry.start_date).toISOString();
+  return Object.assign({}, entry, {timestamp});
 }
-
-module.exports = {templatePromise, docsPromise};
