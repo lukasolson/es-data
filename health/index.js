@@ -1,20 +1,25 @@
-const path = require('path');
-const fs = require('fs');
-const {mapKeys, snakeCase} = require('lodash');
+const {resolve} = require('path');
+const {readFile} = require('fs');
+const {mapKeys, mapValues, snakeCase} = require('lodash');
 const {toJson} = require('xml2json');
 const {indexDocs} = require('../indexer');
 
 const index = 'health';
 const type = 'record';
-const filename = path.resolve(__dirname, 'data', 'apple_health_export', 'export.xml');
+const filename = resolve(__dirname, 'data', 'apple_health_export', 'export.xml');
 
-fs.readFile(filename, 'utf8', indexFile);
+readFile(filename, 'utf8', (err, xml) => {
+  if (err) throw err;
+  indexFile(xml);
+});
 
-function indexFile(err, xml) {
-  const {HealthData} = toJson(xml, {object: true});
+function indexFile(xml) {
+  const {HealthData} = toJson(xml, {
+    object: true,
+    coerce: true,
+  });
   indexDocs(
-    HealthData.Record
-    .map(normalizeKeys)
+    HealthData.Record.map(normalizeKeys)
     .map(addTimestamp)
     .map((body, i) => ({index, type, id: i, body}))
   );
@@ -26,5 +31,5 @@ function normalizeKeys(entry) {
 
 function addTimestamp(entry) {
   const timestamp = new Date(entry.start_date).toISOString();
-  return Object.assign({}, entry, {timestamp});
+  return {...entry, '@timestamp': timestamp};
 }

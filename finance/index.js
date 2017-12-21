@@ -1,28 +1,30 @@
-const _ = require('lodash');
-const path = require('path');
-const fs = require('fs');
+const {resolve} = require('path');
+const {readFile} = require('fs');
+const {mapKeys, snakeCase} = require('lodash');
+const {parse} = require('papaparse');
 const {indexDocs} = require('../indexer');
 
 const index = 'finance';
 const type = 'transaction';
-const filename = path.resolve(__dirname, 'data', 'Financial Transactions - Sheet1.tsv');
+const filename = resolve(__dirname, 'data', 'Financial Transactions - Sheet1.tsv');
 
-fs.readFile(filename, 'utf8', indexFile);
+readFile(filename, 'utf8', (err, tsv) => {
+  if (err) throw err;
+  indexFile(tsv);
+});
 
-function indexFile(err, tsv) {
-  const rows = (
-    tsv.split('\r\n')
-    .filter(row => row.length > 0) // Remove empty lines
-    .map(row => row.split('\t'))
-  );
-  const headers = rows[0].map(_.snakeCase);
+function indexFile(tsv) {
+  const {data} = parse(tsv, {header: true});
   indexDocs(
-    rows.slice(1) // Remove header
-    .map(row => _.zipObject(headers, row))
+    data.map(normalizeKeys)
     .map(parseAmount)
     .map(addTimestamp)
     .map((body, i) => ({index, id: i, type, body}))
   );
+}
+
+function normalizeKeys(entry) {
+  return mapKeys(entry, (value, key) => snakeCase(key));
 }
 
 function parseAmount(entry) {
@@ -32,10 +34,10 @@ function parseAmount(entry) {
     .split(')').join('')
     .split(',').join('')
   );
-  return Object.assign({}, entry, {amount});
+  return {...entry, amount};
 }
 
 function addTimestamp(entry) {
   const timestamp = new Date(entry.date).toISOString();
-  return Object.assign({}, entry, {timestamp});
+  return {...entry, '@timestamp': timestamp};
 }
