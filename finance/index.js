@@ -1,6 +1,6 @@
 const {resolve} = require('path');
 const {readFile} = require('fs');
-const {mapKeys, snakeCase} = require('lodash');
+const {mapKeys, snakeCase, assign} = require('lodash');
 const {parse} = require('papaparse');
 const {indexDocs} = require('../indexer');
 
@@ -19,7 +19,7 @@ function indexFile(tsv) {
     data.map(normalizeKeys)
     .map(parseAmount)
     .map(addTimestamp)
-    .map((body, i) => ({index, id: i, type, body}))
+    .map(body => ({index, type, body}))
   );
 }
 
@@ -34,10 +34,10 @@ function parseAmount(entry) {
     .split(')').join('')
     .split(',').join('')
   );
-  return {...entry, amount};
+  return assign({}, entry, {amount});
 }
 
 function addTimestamp(entry) {
   const timestamp = new Date(entry.date).toISOString();
-  return {...entry, '@timestamp': timestamp};
+  return assign({}, entry, {timestamp});
 }

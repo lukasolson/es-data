@@ -1,6 +1,6 @@
 const {resolve} = require('path');
 const {readFile} = require('fs');
-const {mapKeys, mapValues, snakeCase} = require('lodash');
+const {mapKeys, snakeCase, assign} = require('lodash');
 const {toJson} = require('xml2json');
 const {indexDocs} = require('../indexer');
 
@@ -14,14 +14,11 @@ readFile(filename, 'utf8', (err, xml) => {
 });
 
 function indexFile(xml) {
-  const {HealthData} = toJson(xml, {
-    object: true,
-    coerce: true,
-  });
+  const {HealthData} = toJson(xml, {object: true});
   indexDocs(
     HealthData.Record.map(normalizeKeys)
     .map(addTimestamp)
-    .map((body, i) => ({index, type, id: i, body}))
+    .map(body => ({index, type, body}))
   );
 }
 
@@ -31,5 +28,5 @@ function normalizeKeys(entry) {
 
 function addTimestamp(entry) {
   const timestamp = new Date(entry.start_date).toISOString();
-  return {...entry, '@timestamp': timestamp};
+  return assign({}, entry, {timestamp});
 }

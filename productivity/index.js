@@ -22,14 +22,14 @@ function indexFile(filename) {
       const activity = activities[entry.activity_id];
       const app = apps[activity.app_id];
       const category = categories[app.category_id];
-      return {...entry, activity, app, category};
+      return Object.assign({}, entry, {activity, app, category});
     })
     .map(addTimestamp)
-    .map((body, i) => ({index, type, id: i, body}))
+    .map(body => ({index, type, body}))
   );
 }
 
 function addTimestamp(entry) {
   const timestamp = new Date(entry.start_time * 1000).toISOString();
-  return {...entry, '@timestamp': timestamp};
+  return Object.assign({}, entry, {timestamp});
 }
