@@ -18,12 +18,21 @@ function indexFile(xml) {
   indexDocs(
     HealthData.Record.map(normalizeKeys)
     .map(addTimestamp)
+    .map(parseValue)
     .map(body => ({index, type, body}))
   );
 }
 
 function normalizeKeys(entry) {
   return mapKeys(entry, (value, key) => snakeCase(key));
+}
+
+function parseValue(entry) {
+  const value = parseFloat(entry.value);
+  return assign({}, entry, {
+    value: isNaN(value) ? 1 : value,
+    unit: isNaN(value) ? entry.value : entry.unit
+  });
 }
 
 function addTimestamp(entry) {
